@@ -8,11 +8,19 @@ Each entry says what is missing, and either what would close it or why it is per
 
 ## Deliberate, and permanent
 
-**The engine is read-only, and always will be.** It holds no key, signs no transaction, and
-deploys nothing. This is a property of the whole stack rather than a setting, and it is the
-reason its documents can be trusted as observations: a tool that can also act has an
-incentive to describe its action favourably. If you want deployment, this is not that tool,
-and adding it would not be a feature.
+**The engine is read-only, and always will be.** It holds no key, signs no transaction, and no
+command it offers can change anything on a chain — there is no mutating mode, no `--send`, and
+nothing to configure that would add one. This is a property of the whole stack rather than a
+setting, and it is the reason its documents can be trusted as observations: a tool that can
+also act has an incentive to describe its action favourably. If you want deployment, this is
+not that tool, and adding it would not be a feature.
+
+The repository does ship `scripts/deploy-reference-contract.sh`, which is worth naming here
+because it looks like an exception and is not. It is a shell script wrapping the Stellar CLI,
+it operates on this project's own reference contract rather than on yours, and no part of the
+engine binary is involved in it — the engine only reads the result back off the chain. "The
+tool cannot act" and "the maintainers can deploy their own fixture" are both true, and this
+paragraph says both so that the first is not read as the second.
 
 **The explorer does not analyse.** It renders documents the engine committed, at digests
 recorded in a manifest. There is no query box that takes a contract ID, because the moment
