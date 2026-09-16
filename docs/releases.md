@@ -55,9 +55,26 @@ digest alone.
 
 ## Publishing status
 
-The engine and the specification are not published to crates.io. Both are released as
-tagged, reproducible source, and the engine's `CHANGELOG.md` states plainly that no version
-has been published yet. This is a deliberate gap rather than an oversight, and it is
-recorded in [gaps](gaps.md) with what would have to change for it to close: a crates.io
-release is a permanent promise about an API, and this project would rather make that promise
-once the reference contract's story is finished than make it early and negotiate afterwards.
+**Nothing here is tagged and nothing is published.** Neither the engine nor the specification
+has ever had a tag, and no version of either has been published to crates.io. The engine's
+`CHANGELOG.md` agrees and says so in its own words: its `1.0.0` heading is marked
+*unreleased*, followed by "No version of this engine has been published yet".
+
+What exists is the mechanism, not a release. Each repository carries a `release.yml` gated on
+a `v*` tag, and a `release.sh` that reads the version out of the manifest rather than being
+told it. That workflow has never run, because no tag has been pushed — dispatching it by hand
+on a branch is refused by its own version check, which is the gate working rather than a
+fault. Publication additionally needs a `CARGO_REGISTRY_TOKEN` secret that is not configured,
+so the publish step would fail until one is added.
+
+This is a deliberate gap rather than an oversight, and it is recorded in [gaps](gaps.md) with
+what would have to change for it to close: a crates.io release is a permanent promise about
+an API, and this project would rather make that promise once the reference contract's story
+is finished than make it early and negotiate afterwards.
+
+An earlier version of this page said the engine and the specification were "released as
+tagged, reproducible source". Reproducible source is right; tagged was not, and a reader
+checking the releases list against this page would have found the page wrong in the direction
+that flatters the project. The distinction is worth keeping in the document rather than
+quietly editing away, because "we have a release process" and "we have made a release" are
+the two sentences this whole page exists to keep apart.
