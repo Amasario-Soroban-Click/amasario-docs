@@ -26,9 +26,19 @@ than fetched by it, so the boundary stays where the operator put it.
 
 ## Known, with a path to close
 
-**Nothing is published to crates.io.** The engine and the specification are tagged,
-reproducible source only. Publishing is a permanent promise about an API, and the honest
-reason for waiting is that the reference contract workflow is not finished. Closing it is a
+**Nothing is tagged and nothing is published.** The engine and the specification are
+reproducible source only. This paragraph used to say they were "tagged", and that was wrong:
+neither repository has ever had a tag. What exists is a release workflow in each, gated on a
+`v*` tag, and a `release.sh` that reads the same version out of the manifest — so the
+mechanism is written and has never been exercised, which is a different statement from
+having released something.
+
+The workflow refuses a tag that disagrees with `Cargo.toml`, and dispatching it by hand on a
+branch is rejected for exactly that reason, so the first real release is the first time that
+gate runs for real. Publication also needs a `CARGO_REGISTRY_TOKEN` secret that is not
+configured, so the publish step would fail until one is added. Publishing is a permanent
+promise about an API, and the honest reason for waiting is that the reference contract
+workflow is not finished. Closing this means pushing a tag and adding the secret — a
 decision about appetite, not about mechanism.
 
 **Coverage is measured, and is not yet a gate.** The engine now states its coverage —
