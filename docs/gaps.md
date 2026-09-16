@@ -31,10 +31,16 @@ reproducible source only. Publishing is a permanent promise about an API, and th
 reason for waiting is that the reference contract workflow is not finished. Closing it is a
 decision about appetite, not about mechanism.
 
-**Test coverage is not measured in CI.** The suite is large and CI runs it on every change,
-but there is no coverage job, so the project cannot state its own coverage number and this
-page will not invent one. Closing it means adding coverage measurement to the pipeline and
-publishing the figure — including if it is unflattering.
+**Coverage is measured, and is not yet a gate.** The engine now states its coverage —
+88.14% of lines, 89.25% of regions — with the command that reproduces it, and per crate
+between 79.79% and 97.39% for eleven of the twelve. What is still missing is the enforcement:
+no workflow fails when the figure drops, so the number is a fact about one afternoon rather
+than a property the project holds. Two of the figures also carry caveats that matter more
+than the number, and both are published rather than rounded: `amasario-cli` reports about
+24% because the binary it is tested through is built separately from the instrumented run,
+and the snapshot suite needs a `cargo build` that coverage does not perform. Closing this
+means fixing the harness first and gating second, in that order — a gate built on a run that
+cannot execute the suite is a gate that excludes the tests most likely to catch a change.
 
 **The reference contract pair is not deployed.** Its contracts are built by a script whose
 output digests are committed, and CI rebuilds them and compares, so the fixture is
