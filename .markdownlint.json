@@ -1,0 +1,18 @@
+{
+  "MD013": false,
+  "MD024": { "siblings_only": true },
+  "MD040": {
+    "allowed_languages": [
+      "text",
+      "console",
+      "bash",
+      "sh",
+      "json",
+      "toml",
+      "yaml",
+      "rust",
+      "typescript",
+      "javascript"
+    ]
+  }
+}

@@ -1,0 +1,81 @@
+name: Docs
+
+# This repository is prose, so its CI cannot compile anything. What it can do is hold the
+# checks that a reader would otherwise perform by hand and only sometimes: that every link
+# resolves *including its heading anchor*, that the index names every page and nothing else,
+# and that the pages keep the shape they are supposed to have. Each is silent when it
+# passes, which is exactly why it has to be a job rather than a habit.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: docs-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  markdown:
+    name: Markdown style
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Lint every markdown file
+        run: npx --yes markdownlint-cli2@0.14.0 "**/*.md"
+
+  links:
+    name: Links and anchors
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Resolve every internal link and heading anchor
+        run: node scripts/check-links.mjs
+
+  index:
+    name: Index matches the pages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Hold README.md against docs/
+        run: node scripts/check-index.mjs
+
+  pages:
+    name: Page structure
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Check titles, names and locality
+        run: node scripts/check-pages.mjs

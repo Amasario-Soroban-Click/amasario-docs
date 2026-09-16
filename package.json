@@ -1,0 +1,25 @@
+{
+  "name": "amasario-docs",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Cross-repository documentation for Amasario: the seams, the policy and the gaps.",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Amasario-Soroban-Click/amasario-docs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "check": "npm run check:markdown && npm run check:links && npm run check:index && npm run check:pages",
+    "check:markdown": "markdownlint-cli2 \"**/*.md\"",
+    "check:links": "node scripts/check-links.mjs",
+    "check:index": "node scripts/check-index.mjs",
+    "check:pages": "node scripts/check-pages.mjs"
+  },
+  "devDependencies": {
+    "markdownlint-cli2": "0.14.0"
+  }
+}
