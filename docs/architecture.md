@@ -51,10 +51,18 @@ restriction is what makes it safe to look at: a tool that draws arrows is more p
 than the JSON underneath it, so the picture must not be able to claim more than the table
 beside it.
 
-**4. Read-only is a property of the whole stack, not a policy statement.** Nothing in any
-layer holds a key, signs a transaction or deploys anything. The reference contract pair in
-the engine repository exists to be *analysed* — it is a reproducible fixture with a
-recorded digest, not a deployed service.
+**4. Read-only is a property of the whole stack, not a policy statement.** No layer holds a
+key or signs a transaction, and none of the shipped programs deploys anything. The reference
+contract pair in the engine repository exists to be *analysed*: a reproducible fixture whose
+compiled bytes are committed with recorded digests, and which is also deployed to Testnet so
+that the fixture has a counterpart on a chain rather than only in a directory.
+
+That deployment is worth stating precisely, because it is the one place this rule looks like
+it bends. It is made by `scripts/deploy-reference-contract.sh`, a maintainer's tool that
+names an identity the `stellar` CLI holds in its own keystore — the script reads no secret,
+and no crate of the engine is linked into it or aware of it. So the stack still holds no key;
+what has changed is that the organisation now has a pinned on-chain deployment to point at,
+with the module digests checked against the fixtures on both sides.
 
 ## What each layer promises the layer below
 

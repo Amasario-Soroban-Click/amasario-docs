@@ -42,13 +42,21 @@ and the snapshot suite needs a `cargo build` that coverage does not perform. Clo
 means fixing the harness first and gating second, in that order — a gate built on a run that
 cannot execute the suite is a gate that excludes the tests most likely to catch a change.
 
-**The reference contract pair is not deployed.** Its contracts are built by a script whose
-output digests are committed, and CI rebuilds them and compares, so the fixture is
-reproducible evidence about a build. It is *not* a deployed Testnet contract, and no
-on-chain contract ID is published anywhere in this organisation, because nothing has been
-deployed. This matters mainly for how the claim is read: "we analysed a contract we built"
-is a statement about the tool, whereas "we analysed a contract we deployed" is a statement
-about a chain, and only the first one is currently true.
+**The reference contract pair is deployed, and the scheduled live suite still does not use
+it.** The pair is live on Testnet — the callee at
+`CBMPDHYWBGBJ4JAUKNLE6OTC4LQTLV3XFVMAN72MCFSMN2EOJPYEXK6N` and the caller at
+`CBNCEDVA7SQ2NSNGG7RGQOK4VESBN2YSCLJ6DSHRL6QH72VPR5MYIVCA`, with both deployed modules
+hashing to the committed fixtures — so "we analysed a contract we built" has become "we
+analysed a contract we deployed", which is a statement about a chain rather than about a
+tool. What has *not* changed is which contract CI's live run analyses:
+`scripts/live-target.env` still names a third-party market, because the assertion there is
+that a contract in ordinary use yields a verified `INVOCATES` edge, and a pair that is
+called only when someone runs the deploy script is quiet by default. So the engine can
+analyse its own contract, and has — the record is in the engine's `docs/testnet.md` — but
+the scheduled run does not, and a reader who assumes otherwise has been misled by the word
+"deployed" rather than by anything the tools say. Closing this means moving the deployment
+into a pipeline rather than leaving it a maintainer's command, which is a decision about
+whose key signs rather than about mechanism.
 
 **Bounded searches are disclosed but still bounded.** A path search that reaches its limit
 reports truncation rather than silently returning a short list — a bug of exactly the

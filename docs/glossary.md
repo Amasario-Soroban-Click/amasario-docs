@@ -75,8 +75,12 @@ two cannot drift.
 
 **Reference contract** — a small Soroban contract pair built from source in this organisation
 purely to be analysed: a caller and a callee, whose compiled bytes are committed as fixtures
-with recorded digests. It is not deployed, and its purpose is to give the dependency and
-provenance code a real, reproducible input rather than a synthetic one.
+with recorded digests. Its purpose is to give the dependency and provenance code a real,
+reproducible input rather than a synthetic one, and it is also deployed to Testnet so that
+that input has a counterpart on a chain: the deployed modules hash to the committed fixtures,
+and the caller's invocation of the callee is an edge the engine observes rather than reads
+out of a file. It is a fixture that happens to be deployed, not a service — nothing calls it
+on a schedule, and the deployer is a maintainer's identity rather than a project account.
 
 ## Versions
 
