@@ -1,5 +1,9 @@
 # Amasario — documentation
 
+[![Walkthrough](https://img.shields.io/badge/%E2%96%B6_watch-the_5--minute_walkthrough-58a6ff)](https://amasario-explorer.vercel.app/pitch/amasario-pitch-v1.mp4)
+
+[![Press play: the five-minute walkthrough](https://amasario-explorer.vercel.app/pitch/amasario-pitch-thumbnail.png)](https://amasario-explorer.vercel.app/pitch/amasario-pitch-v1.mp4)
+
 Amasario is four repositories, and this is the one that is about the other three. It holds
 what belongs to no single layer: how the layers fit together, what each promises the others,
 how a change travels between them, and what the project has not done yet.
