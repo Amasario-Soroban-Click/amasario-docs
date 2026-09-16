@@ -1,5 +1,7 @@
 # Amasario — documentation
 
+[![Docs](https://github.com/Amasario-Soroban-Click/amasario-docs/actions/workflows/docs.yml/badge.svg?branch=main)](https://github.com/Amasario-Soroban-Click/amasario-docs/actions/workflows/docs.yml)
+[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 [![Walkthrough](https://img.shields.io/badge/%E2%96%B6_watch-the_5--minute_walkthrough-58a6ff)](https://amasario-explorer.vercel.app/pitch/amasario-pitch-v2.mp4)
 
 [![Press play: the five-minute walkthrough](https://amasario-explorer.vercel.app/pitch/amasario-pitch-thumbnail.png)](https://amasario-explorer.vercel.app/pitch/amasario-pitch-v2.mp4)
